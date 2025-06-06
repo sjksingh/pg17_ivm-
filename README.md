@@ -12,19 +12,14 @@ This repository demonstrates **pg_ivm** (PostgreSQL Incremental View Maintenance
 
 ```bash
 # Clone this repository
-git clone git@github.com:sjksingh/pg17_ivm-.git
-cd pg17-
+git clone git clone https://github.com/sjksingh/pg17_ivm-.git
+cd pg17_ivm-
 
 # Run PostgreSQL 17 with pg_ivm pre-installed
-docker run -d \
-  --name postgres-pg_ivm-demo \
-  -e POSTGRES_PASSWORD=demo123 \
-  -p 5432:5432 \
-  sjksingh/pg17-json-table
+bash build.sh
 
 # Connect to the database
-psql -h localhost -U postgres -d postgres -W
-# Password: demo123
+docker exec -it pg17-extended psql -U postgres -d partitioning_test
 ```
 
 ## 📦 What's Inside
