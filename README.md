@@ -11,7 +11,7 @@ This repository demonstrates **pg_ivm** (PostgreSQL Incremental View Maintenance
 
 ```bash
 # Clone this repository
-git clone git clone https://github.com/sjksingh/pg17_ivm-.git
+git clone https://github.com/sjksingh/pg17_ivm-.git
 cd pg17_ivm-
 
 # Run PostgreSQL 17 with pg_ivm pre-installed
@@ -280,8 +280,32 @@ POSTGRES_DB=postgres       # Default database
 POSTGRES_USER=postgres     # Default user
 ```
 
-### Custom Configuration
-The image includes optimized settings for development and testing.
+📉 Limitations of pg_ivm
+
+While pg_ivm is powerful, it’s not always the best fit. Here are its key limitations and trade-offs:
+
+⚠️ Limitations
+	•	Limited SQL Coverage:
+Only supports a subset of SELECT queries—GROUP BY, joins, aggregates. No DISTINCT, HAVING, or window functions.
+	•	Trigger Overhead:
+Each base table update fires triggers, which may introduce latency or contention in write-heavy systems.
+	•	Row-by-Row Delta Maintenance:
+Unlike full-refresh, it updates per row change, which can become inefficient for high-churn workloads.
+	•	No Automatic Schema Change Handling:
+Changes in base tables (like renaming a column) require dropping and recreating the IMMV manually.
+	•	Debuggability:
+Debugging IMMV logic may be harder due to generated triggers and internal metadata.
+
+### Storage vs Performance Tradeoff
+
+
+| Approach                    | Storage          | Query Speed                       | Freshness              | Complexity        |
+|-----------------------------|------------------|-----------------------------------|------------------------|-------------------|
+| **Regular View**            | 🟢 None          | 🔴 Slow (recomputed every time)  | 🟢 Always fresh        | 🟢 Very low       |
+| **Materialized View (MV)**  | 🔴 High          | 🟢 Fast (precomputed results)    | 🔴 Stale until refresh | 🟢 Low            |
+| **pg_ivm (Incremental MV)** | 🟡 Moderate      | 🟢 Fast (auto-updated deltas)    | 🟢 Near real-time      | 🟠 Medium         |
+
+
 
 ## 📚 Additional Resources
 
