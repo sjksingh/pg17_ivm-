@@ -6,9 +6,8 @@ This repository demonstrates **pg_ivm** (PostgreSQL Incremental View Maintenance
 
 ### Prerequisites
 - Docker installed on your system
-- Basic PostgreSQL knowledge
 
-### Get Started in 30 seconds
+### Get Started 
 
 ```bash
 # Clone this repository
