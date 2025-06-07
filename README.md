@@ -146,7 +146,7 @@ SELECT 'BEFORE:' as status, category, num_orders, total_revenue
 FROM category_sales_summary ORDER BY category;
 
 -- Add a high-value order
-INSERT INTO orders (product_id, quantity) VALUES (2, 5); -- 5 MacBooks
+SELECT add_random_orders(500);
 
 -- Check immediately - NO REFRESH NEEDED!
 SELECT 'AFTER:' as status, category, num_orders, total_revenue 
@@ -155,10 +155,21 @@ FROM category_sales_summary ORDER BY category;
 
 **Expected Result:**
 ```
- status |  category   | num_orders | total_revenue 
+ SELECT 'BEFORE:' as status, category, num_orders, total_revenue
+FROM category_sales_summary ORDER BY category;
+ status  |  category   | num_orders | total_revenue
+---------+-------------+------------+---------------
+ BEFORE: | Apparel     |         41 |         18820
+ BEFORE: | Electronics |         32 |        181006
+ BEFORE: | Home        |         27 |          4995
+
+SELECT 'AFTER:' as status, category, num_orders, total_revenue
+FROM category_sales_summary ORDER BY category;
+ status |  category   | num_orders | total_revenue
 --------+-------------+------------+---------------
- BEFORE | Electronics |         35 |       534891
- AFTER  | Electronics |         36 |       544886  -- Updated instantly!
+ AFTER: | Apparel     |        212 |         90280
+ AFTER: | Electronics |        195 |        963474
+ AFTER: | Home        |        193 |         31890 
 ```
 
 ## 🔍 Understanding pg_ivm Internals
