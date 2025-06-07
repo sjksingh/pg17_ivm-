@@ -34,7 +34,7 @@ This Docker image includes PostgreSQL 17 with these extensions:
 | pg_cron | 1.6 | Job scheduling |
 | pg_stat_statements | 1.11 | Query performance tracking |
 
-## 🎯 The Demo: E-commerce Analytics
+## 🎯 The Demo: Basic Analytics
 
 ### Problem Statement
 Traditional materialized views require manual `REFRESH` operations:
