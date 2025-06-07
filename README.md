@@ -186,6 +186,29 @@ FROM category_sales_summary ORDER BY category;
 SELECT tgname, tgrelid::regclass::text AS table_name
 FROM pg_trigger
 WHERE tgname ILIKE '%ivm%';
+
+              tgname               |       table_name
+-----------------------------------+------------------------
+ IVM_trigger_ins_before_19317      | orders
+ IVM_trigger_del_before_19318      | orders
+ IVM_trigger_upd_before_19319      | orders
+ IVM_trigger_truncate_before_19320 | orders
+ IVM_trigger_ins_after_19321       | orders
+ IVM_trigger_del_after_19322       | orders
+ IVM_trigger_upd_after_19323       | orders
+ IVM_trigger_truncate_after_19324  | orders
+ IVM_trigger_ins_before_19325      | products
+ IVM_trigger_del_before_19326      | products
+ IVM_trigger_upd_before_19327      | products
+ IVM_trigger_truncate_before_19328 | products
+ IVM_trigger_ins_after_19329       | products
+ IVM_trigger_del_after_19330       | products
+ IVM_trigger_upd_after_19331       | products
+ IVM_trigger_truncate_after_19332  | products
+ IVM_prevent_immv_change_19339     | category_sales_summary
+ IVM_prevent_immv_change_19340     | category_sales_summary
+ IVM_prevent_immv_change_19341     | category_sales_summary
+ IVM_prevent_immv_change_19342     | category_sales_summary
 ```
 
 ### Check Sizes
@@ -201,6 +224,12 @@ SELECT
     'Incremental Materialized View' as type,
     pg_size_pretty(pg_total_relation_size('category_sales_summary')) AS size
 ORDER BY object_name;
+
+      object_name       |             type              |  size
+------------------------+-------------------------------+--------
+ category_sales_summary | Incremental Materialized View | 104 kB
+ orders                 | Table                         | 88 kB
+
 ```
 
 ## 🎯 Use Cases
